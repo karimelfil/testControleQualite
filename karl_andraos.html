@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karl Andraos | Personal Page</title>
+  <style>
+    :root {
+      --ink: #172026;
+      --muted: #5f6f78;
+      --paper: #f8faf8;
+      --panel: #ffffff;
+      --line: #dce4df;
+      --green: #1f7a5b;
+      --blue: #285c7f;
+      --coral: #c85f4a;
+      --gold: #c79c35;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .shell {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 16px clamp(18px, 5vw, 72px);
+      background: rgba(248, 250, 248, 0.92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      aspect-ratio: 1;
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+      font-size: 15px;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    nav a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: var(--ink);
+      background: #edf3ef;
+      outline: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 70px);
+      min-height: calc(100vh - 74px);
+      padding: clamp(42px, 7vw, 88px) clamp(18px, 5vw, 72px) 44px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 0 18px;
+      padding: 7px 11px;
+      border: 1px solid #c8d7cf;
+      border-radius: 8px;
+      color: var(--green);
+      background: #eef7f1;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(46px, 8vw, 92px);
+      line-height: 0.96;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 650px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: clamp(18px, 2.5vw, 23px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 12px 18px;
+      border: 1px solid var(--ink);
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    .button:hover,
+    .button:focus {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(23, 32, 38, 0.14);
+      outline: none;
+    }
+
+    .portrait {
+      position: relative;
+      min-height: 500px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(31, 122, 91, 0.18), transparent 44%),
+        linear-gradient(215deg, rgba(200, 95, 74, 0.20), transparent 48%),
+        #edf2f0;
+    }
+
+    .portrait::before,
+    .portrait::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 8px;
+    }
+
+    .portrait::before {
+      width: 72%;
+      height: 48%;
+      right: -18%;
+      top: 12%;
+      background: var(--blue);
+      transform: rotate(-12deg);
+    }
+
+    .portrait::after {
+      width: 68%;
+      height: 42%;
+      left: -22%;
+      bottom: 10%;
+      background: var(--gold);
+      transform: rotate(10deg);
+    }
+
+    .portrait-inner {
+      position: absolute;
+      inset: 26px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(6px);
+    }
+
+    .monogram {
+      display: grid;
+      place-items: center;
+      width: min(220px, 58vw);
+      aspect-ratio: 1;
+      border-radius: 8px;
+      background: var(--ink);
+      color: white;
+      font-size: clamp(58px, 12vw, 104px);
+      font-weight: 900;
+    }
+
+    .caption {
+      max-width: 360px;
+      margin: 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    section {
+      padding: clamp(42px, 7vw, 78px) clamp(18px, 5vw, 72px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4.5vw, 48px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      max-width: 420px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+      gap: 22px;
+    }
+
+    .panel,
+    .project,
+    .contact-box {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: 0 18px 42px rgba(23, 32, 38, 0.06);
+    }
+
+    .panel {
+      padding: clamp(22px, 4vw, 34px);
+    }
+
+    .panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-left: 5px solid var(--green);
+      border-radius: 8px;
+      background: #eef7f1;
+    }
+
+    .stat:nth-child(2) {
+      border-left-color: var(--coral);
+      background: #fbefec;
+    }
+
+    .stat:nth-child(3) {
+      border-left-color: var(--blue);
+      background: #eef4f8;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill {
+      min-height: 150px;
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+    }
+
+    .skill h3,
+    .project h3 {
+      margin: 0 0 10px;
+      font-size: 20px;
+      letter-spacing: 0;
+    }
+
+    .skill p,
+    .project p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .project {
+      overflow: hidden;
+    }
+
+    .project-strip {
+      height: 10px;
+      background: var(--green);
+    }
+
+    .project:nth-child(2) .project-strip {
+      background: var(--blue);
+    }
+
+    .project:nth-child(3) .project-strip {
+      background: var(--coral);
+    }
+
+    .project-content {
+      padding: 22px;
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 420px);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .contact-box {
+      padding: 24px;
+    }
+
+    .contact-box p {
+      margin: 0 0 12px;
+      color: var(--muted);
+    }
+
+    .contact-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .email {
+      padding: 10px 12px;
+      border-radius: 8px;
+      background: #eef4f8;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    footer {
+      padding: 24px clamp(18px, 5vw, 72px);
+      color: var(--muted);
+      background: #eef2ef;
+      font-size: 14px;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .about-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .portrait {
+        min-height: 390px;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .section-note {
+        margin-top: 12px;
+      }
+
+      .skills,
+      .project-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .skills,
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .portrait-inner {
+        inset: 16px;
+        padding: 20px;
+      }
+
+      .monogram {
+        width: min(190px, 72vw);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="#home" aria-label="Karl Andraos home">
+        <span class="brand-mark">KA</span>
+        <span>Karl Andraos</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#focus">Focus</a>
+        <a href="#work">Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Personal Page</p>
+          <h1>Karl Andraos</h1>
+          <p class="lead">
+            A clean personal page for coursework, projects, and practical ideas in quality control, web development, and problem solving.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#work">View Work</a>
+            <a class="button secondary" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <div class="portrait" aria-label="Karl Andraos identity artwork">
+          <div class="portrait-inner">
+            <div class="monogram">KA</div>
+            <p class="caption">
+              Organized work, clear presentation, and steady improvement.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-heading">
+          <h2>About</h2>
+          <p class="section-note">A simple profile area ready for university or portfolio details.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="panel">
+            <p>
+              Karl Andraos is building a practical profile around learning, projects, and clear communication.
+              This page can be used as a starting point for a personal portfolio, class assignment, or project showcase.
+            </p>
+            <p>
+              The layout keeps the important details easy to scan: who Karl is, what he focuses on, what he is working on, and how to reach him.
+            </p>
+          </div>
+
+          <div class="stats">
+            <div class="stat">
+              <strong>01</strong>
+              <span>Personal identity</span>
+            </div>
+            <div class="stat">
+              <strong>02</strong>
+              <span>Coursework and projects</span>
+            </div>
+            <div class="stat">
+              <strong>03</strong>
+              <span>Quality-focused mindset</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="focus">
+        <div class="section-heading">
+          <h2>Focus</h2>
+          <p class="section-note">Areas that fit a student project page and can be edited anytime.</p>
+        </div>
+
+        <div class="skills">
+          <article class="skill">
+            <h3>Quality Control</h3>
+            <p>Checking details, improving processes, and keeping work reliable.</p>
+          </article>
+          <article class="skill">
+            <h3>Web Basics</h3>
+            <p>Building structured pages with HTML, CSS, and simple JavaScript.</p>
+          </article>
+          <article class="skill">
+            <h3>Documentation</h3>
+            <p>Writing clear notes so ideas, steps, and results are easy to follow.</p>
+          </article>
+          <article class="skill">
+            <h3>Problem Solving</h3>
+            <p>Breaking tasks into smaller parts and finishing them with care.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="work">
+        <div class="section-heading">
+          <h2>Work</h2>
+          <p class="section-note">Example project cards for assignments, experiments, or portfolio items.</p>
+        </div>
+
+        <div class="project-grid">
+          <article class="project">
+            <div class="project-strip"></div>
+            <div class="project-content">
+              <h3>Quality Report</h3>
+              <p>A project area for inspection notes, charts, or improvement summaries.</p>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-strip"></div>
+            <div class="project-content">
+              <h3>HTML Practice</h3>
+              <p>A place to collect small pages, layouts, and frontend experiments.</p>
+            </div>
+          </article>
+          <article class="project">
+            <div class="project-strip"></div>
+            <div class="project-content">
+              <h3>Class Tasks</h3>
+              <p>A simple card for university exercises and completed assignments.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="contact-wrap">
+          <div>
+            <h2>Contact</h2>
+            <p class="section-note">
+              Use this section for a real email, phone number, LinkedIn profile, or university contact details.
+            </p>
+          </div>
+          <div class="contact-box">
+            <p>Karl Andraos</p>
+            <div class="contact-line">
+              <span class="email" id="emailText">karl.andraos@example.com</span>
+              <button class="button secondary" type="button" id="copyEmail">Copy Email</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>&copy; 2026 Karl Andraos. Built as a personal HTML page.</span>
+    </footer>
+  </div>
+
+  <script>
+    const copyButton = document.getElementById("copyEmail");
+    const emailText = document.getElementById("emailText");
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(emailText.textContent);
+        copyButton.textContent = "Copied";
+        setTimeout(() => {
+          copyButton.textContent = "Copy Email";
+        }, 1400);
+      } catch (error) {
+        copyButton.textContent = "Select Email";
+      }
+    });
+  </script>
+</body>
+</html>
